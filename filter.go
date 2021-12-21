@@ -117,6 +117,7 @@ func invoke(isConsumer bool, ctx context.Context, invoker protocol.Invoker, invo
 			span.SetPeer(getAttachmentStringValue(invocation, constant.RemoteAddr))
 		}
 	}
+	defer span.End()
 	span.Tag(go2sky.TagURL, generateRequestURL(url, operationName))
 	span.SetComponent(dubboComponentID)
 	span.SetSpanLayer(agentv3.SpanLayer_RPCFramework)
