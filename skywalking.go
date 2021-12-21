@@ -21,6 +21,10 @@ var (
 	tracer      *go2sky.Tracer
 )
 
+func InitSkywalking() {
+	onFirstCall.Do(initAndStartReporting)
+}
+
 const (
 	skywalkingConfigTopLevelKey  = "skywalking"
 	skywalkingCollectorServerKey = "skywalkingCollectorServer"
@@ -29,6 +33,10 @@ const (
 
 func GetReporter() go2sky.Reporter {
 	return reporter
+}
+
+func GetTracer() *go2sky.Tracer {
+	return tracer
 }
 
 func getGrpcSetting() (server, application string) {

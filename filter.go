@@ -33,7 +33,6 @@ func init() {
 type filter func(ctx context.Context, invoker protocol.Invoker, invocation protocol.Invocation) protocol.Result
 
 func (invoke filter) Invoke(ctx context.Context, invoker protocol.Invoker, invocation protocol.Invocation) protocol.Result {
-	onFirstCall.Do(initAndStartReporting)
 	return invoke(ctx, invoker, invocation)
 }
 
