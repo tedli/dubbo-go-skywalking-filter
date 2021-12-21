@@ -55,14 +55,14 @@ func generateOperationName(url *common.URL, invocation protocol.Invocation) stri
 		builder.WriteString(group)
 		builder.WriteString("/")
 	}
-	builder.WriteString(url.Path)
+	builder.WriteString(strings.Trim(url.Path, "/"))
 	builder.WriteString(".")
 	builder.WriteString(invocation.MethodName())
 	builder.WriteString("(")
-	parameterTypes := invocation.ParameterTypes()
-	lastIndex := len(parameterTypes) - 1
-	for i, parameter := range parameterTypes {
-		builder.WriteString(parameter.String())
+	parameterValues := invocation.ParameterValues()
+	lastIndex := len(parameterValues) - 1
+	for i, parameter := range parameterValues {
+		builder.WriteString(parameter.Type().String())
 		if i < lastIndex {
 			builder.WriteString(",")
 		}
