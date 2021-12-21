@@ -27,6 +27,10 @@ const (
 	collectorServerKey           = "collectorServer"
 )
 
+func GetReporter() go2sky.Reporter {
+	return reporter
+}
+
 func getGrpcSetting() (server, application string) {
 	application = config.GetApplicationConfig().Name
 	// TODO: Support more settings
